@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+                table {
+                  font-family: arial, sans-serif;
+                  border-collapse: collapse;
+                  width: 100%;
+                }
+                
+                td {
+                  border: 1px solid #dddddd;
+                  text-align: left;
+                  padding: 8px;
+                }
+                th {
+                        border: 10px solid #920808;
+                        text-align: left;
+                        padding: 8px;
+                      }
+                </style>
+</head>
+<body>
+        <h3>Start_date:{{daate.start_date}}</h3>
+        <h3>End_date:{{daate.end_date}}</h3>
+        <h1> Hello {{user.username}}.Welcome to BIDDING</h1>
+        <b>You last bid amount:{{user.profile.bid}}</b><br><br>
+        <form method="POST">
+                {%csrf_token%} 
+        <input type="text" name="amount" placeholder="enter amount" required><br><br>
+        <input type="submit" value="bid"><br><br>
+        </form>
+
+        <table>
+        {% for s in y %}
+       
+         <tr>
+                
+                {% ifequal s.user_id user.id %}
+                <th>{{s.user_id}}</th>
+                <th>{{s.bid}}</th>
+                
+                {% else %}
+                
+                <td>{{s.user_id}}</td>
+                <td>{{s.bid}}</td>
+                {%endifequal%}
+
+         </tr>       
+
+        {% endfor %}
+        </table>
+        <a href="payment">Click here to pay online.</a>
+</body>
+</html>

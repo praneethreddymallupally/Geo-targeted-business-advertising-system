@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+</head>
+<body>
+        <h1>Publisher site:</h1>
+        Please copy-paste the below src-code in your blog to enable geo-targeted advertising.<br>
+        <textarea rows=40 cols=100 value="<pre>
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+      <script>
+getLocation();
+function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+      
+      function showPosition(position) {
+        var lat=position.coords.latitude;
+        var lon=position.coords.longitude;
+        var url1="https://us1.locationiq.com/v1/reverse.php?key=44b84cf3919637&lat=";
+     url1=url1.concat(lat);
+     url1=url1.concat("&lon=");
+     url1=url1.concat(lon);
+     url1=url1.concat("&format=json");
+     
+     var settings = {
+       "async": true,
+       "crossDomain": true,
+       "url":url1,
+       "method": "GET"
+     }
+     
+     $.ajax(settings).done(function (response) {
+       var content = response.address.state_district;
+       var urlx="https://1173310b.ngrok.io/?district=";
+       urlx=urlx.concat(content);
+       urlx=urlx.concat("&category=");
+       urlx=urlx.concat("1");
+       $("#windSpeed").append(urlx);
+        document.getElementById("abcd").src=urlx;
+     });
+        
+      } 
+</script>
+
+ <p>Welcome!Firsts things first.Thankyou for showing interest in visiting our webpage. 
+<br>Please
+      <b> TURN ON your GPS location settings</b> to obtain fruitful results.</p></p>
+      <p><b>Note:</b>Image may take some time(usually 5-10sec)to appear.Yet if the image is not displayed please reload it and make sure you have good internet connection.As of now we have'nt performed dimentionality reduction to load the
+         image faster.Will automate this functionality soon!!!
+      </p>
+      <div id="windSpeed">You are being redirected to:</div>
+      <img id="abcd" src="" alt="">
+
+
+
+
+</pre>"></textarea>
+</body>
+</html>
