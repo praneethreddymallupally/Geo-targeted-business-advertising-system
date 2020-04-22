@@ -15,15 +15,22 @@ def payment(request):
 def displayadd(request):
         a = request.GET['district']
         b=int(request.GET['category'])
-        df=advertise.objects.get(district=a,category=b)
-        fun="C:/Users/PRANEETH REDDY/telusco/"
-        imgurl=fun+df.img.url
-        #if(a=="Nirmal" and b==1):
-        #        image_data = open(r"C:\Users\PRANEETH REDDY\Desktop\wreakinghavoc\secondapp\static\secondapp\images.png", "rb").read()
-        #else:
-        #        image_data = open(r"C:\Users\PRANEETH REDDY\Desktop\wreakinghavoc\secondapp\static\secondapp\images1.jpg", "rb").read()
-        image_data = open(imgurl, "rb").read()
-        return HttpResponse(image_data, content_type="image/png")
+        try:
+            df=advertise.objects.get(district=a,category=b)
+            #raises exception:
+                # blog.models.DoesNotExist: advertise matching query does not exist.
+                # So exception is handled properly
+            fun="C:/Users/PRANEETH REDDY/geo-adv/"
+            imgurl=fun+df.img.url
+            print(imgurl)
+            image_data = open(imgurl, "rb").read()
+            return HttpResponse(image_data, content_type="image/png")
+        except:
+            fun="C:/Users/PRANEETH REDDY/geo-adv/"
+            imgurl=fun+"/media/pics/default.jpg"
+            image_data = open(imgurl, "rb").read()
+            return HttpResponse(image_data, content_type="image/png")
+
 
 
 def publisher(request):
